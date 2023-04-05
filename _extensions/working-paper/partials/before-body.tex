@@ -1,0 +1,48 @@
+$-- Implements the frontmatter, title page, and abstract.
+$--
+$-- %%%% TODO %%%%%
+$-- Customize is needed, otherwise remove this partials to use Quarto default one
+$-- %%%%%%%%%%%%%%%%
+
+% \newcommand\wordcount{Word Count: \nolinebreak[$wordcount$]}
+% above puts Word Count: and the figure for the word count on two separate lines 
+
+
+$if(has-frontmatter)$
+\frontmatter
+$endif$
+$if(title)$
+$if(beamer)$
+\frame{\titlepage}
+$else$
+\maketitle
+$endif$
+
+% abstract
+
+$if(abstract)$
+\begin{abstract}
+\noindent            %eliminate indent in abstract
+$abstract$
+\end{abstract}
+
+% make wordcount field
+
+\newcommand\wordcountname{Word Count: }
+\newenvironment{wordcount}
+       {
+       \begin{center}
+       \wordcountname
+       $wordcount$
+       \end{center}
+       }
+
+$if(wordcount)$ 
+\begin{wordcount}
+\end{wordcount}
+
+$endif$
+$endif$
+$endif$
+
+\newpage             % start new page after abstract

@@ -1,0 +1,67 @@
+title: Working Paper Template
+author: Emmanuel Teitelbaum
+version: 0.2.0
+contributes:
+  formats:
+    common:
+      # define below YAML configuration common to all formats
+      filters:
+        # You can include here Lua filters from your extension format 
+        - color-text.lua
+      shortcodes:
+        # You can include here Lua filters defining shortcodes from your extension
+        - shortcodes.lua
+      knitr:
+        opts_chunk:
+          echo: false
+      geometry: margin=1in
+      fontsize: 12pt
+      mainfont: Palatino Linotype
+      mathfont: Cambria Math
+      indent: true
+      #indenting: 4em
+      linestretch: 2
+    pdf:
+      # define default configuration for the pdf version of your format
+      documentclass: working-paper
+      colorlinks: true
+      urlcolor: Blue4
+      fig-width: 6.5
+      fig-height: 4.5
+      # This format use a bst file with natbib
+      biblio-style: chicago-apsr.bst
+      cite-method: natbib
+      # Set this below (`biblio-config: false`) if your cls already load a bst file
+      # biblio-config: false
+      # Content to add in header that your format is using
+      # (Query: can any of this stuff be moved to the .cls file?)
+      header-includes: | 
+        \usepackage{orcidlink}
+        \setlength{\parindent}{4em} 
+        \setlength{\parskip}{0em}
+        \usepackage{indentfirst}
+        \usepackage{lscape}
+        \newcommand{\blandscape}{\begin{landscape}}
+        \newcommand{\elandscape}{\end{landscape}}
+      template-partials:
+        # Add here the partials your format is using
+        - "partials/title.tex"
+        - "partials/_authors.tex"
+        - "partials/before-body.tex"
+      format-resources:
+        # Add here the resources required for the PDF rendering
+        - working-paper.cls
+        - chicago-apsr.bst
+    html: 
+      # define default configuration for the html version of your format
+      number-sections: true # does not seem to do anything
+      toc: true # does not seem to do anything
+      #theme: custom.scss
+      # Use a CSL file to style (https://www.zotero.org/styles/)
+      csl: american-political-science-association.csl
+      
+      # note: options for number-sections and toc not working for htmls, 
+      # also modification to before-body.tex partial to add page after abstract 
+      # does not appear to have any effect
+      # how to define auto word count like in aspr-submission.cls and connect that to YAML header
+      # how to add other elements of affiliaiton like address of institution?
